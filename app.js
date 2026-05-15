@@ -32,6 +32,7 @@ let photos = storage.get("family-trip-photos", []);
 let editingOrderIndex = null;
 let supabaseClient = null;
 let cloudReady = false;
+let cloudFailureMessage = "";
 
 const dayGrid = document.querySelector("#dayGrid");
 const dayPanel = document.querySelector("#dayPanel");
@@ -197,7 +198,12 @@ async function saveState() {
   saveLocalState();
 
   if (!cloudReady || !supabaseClient) {
-    setSyncStatus("本機儲存", "local");
+    if (config.supabase?.enabled && cloudFailureMessage) {
+      setSyncStatus(cloudFailureMessage, "error");
+      return;
+    }
+
+    setSyncStatus(config.supabase?.enabled ? "尚未連上雲端，已本機儲存" : "本機儲存", "local");
     return;
   }
 
@@ -206,21 +212,25 @@ async function saveState() {
 
   if (error) {
     console.warn("Supabase sync failed:", error);
-    setSyncStatus(`雲端同步失敗：${error.message}`, "error");
+    cloudFailureMessage = `雲端同步失敗：${error.message}`;
+    setSyncStatus(cloudFailureMessage, "error");
     return;
   }
 
+  cloudFailureMessage = "";
   setSyncStatus("雲端已同步", "cloud");
 }
 
 async function connectSupabase() {
   if (!config.supabase?.enabled) {
+    cloudFailureMessage = "";
     setSyncStatus("本機儲存", "local");
     return;
   }
 
   if (!window.supabase?.createClient) {
-    setSyncStatus("Supabase 套件未載入，已本機儲存", "error");
+    cloudFailureMessage = "Supabase 套件未載入，請確認 index.html 的 CDN script 已部署";
+    setSyncStatus(cloudFailureMessage, "error");
     return;
   }
 
@@ -235,11 +245,13 @@ async function connectSupabase() {
 
   if (error) {
     console.warn("Supabase load failed:", error);
-    setSyncStatus(`雲端連接失敗：${error.message}`, "error");
+    cloudFailureMessage = `雲端連接失敗：${error.message}`;
+    setSyncStatus(cloudFailureMessage, "error");
     return;
   }
 
   cloudReady = true;
+  cloudFailureMessage = "";
 
   if (data) {
     tripSettings = data.trip_settings ?? tripSettings;
@@ -806,6 +818,18 @@ photoGrid.addEventListener("click", (event) => {
   if (!button) return;
   photos.splice(Number(button.dataset.deletePhoto), 1);
   void saveState();
+  renderPhotos();
+});
+
+syncStatus.addEventListener("click", async () => {
+  cloudReady = false;
+  cloudFailureMessage = "";
+  await connectSupabase();
+  renderDays();
+  renderDayOptions();
+  renderSiteCopy();
+  renderOrders();
+  renderWishes();
   renderPhotos();
 });
 
