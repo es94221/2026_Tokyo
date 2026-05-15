@@ -1,4 +1,7 @@
 const config = window.tripConfig;
+if (!config) {
+  throw new Error("trip-data.js 沒有載入，請確認它已經部署到 GitHub 並且檔名正確");
+}
 const defaultOrders = config.defaultOrders;
 const defaultWishes = config.defaultWishes;
 const defaultTripSettings = config.tripSettings;
@@ -835,10 +838,20 @@ syncStatus.addEventListener("click", async () => {
 
 async function initApp() {
   syncDaysWithTripSettings();
+  renderTripSettings();
+  renderDays();
+  renderDayOptions();
+  renderSiteCopy();
+  renderMap();
+  renderOrders();
+  renderWishes();
+  renderPhotos();
+
   await connectSupabase();
   syncDaysWithTripSettings();
   const clearedLegacySamples = clearLegacySampleItinerary();
   if (clearedLegacySamples) await saveState();
+
   renderTripSettings();
   renderDays();
   renderDayOptions();
