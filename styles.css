@@ -119,6 +119,7 @@ nav a:hover {
   font-size: 0.78rem;
   font-weight: 800;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .sync-status[data-status="cloud"] {
