@@ -15,7 +15,7 @@ window.tripConfig = {
     description: "把主要住宿、景點或集合地點放在這裡。放入 Google Maps API key 後會顯示互動地圖。",
     query: "Tokyo, Japan",
     zoom: 12,
-    googleMapsApiKey: "https://www.google.com/maps/d/embed?mid=1fHAk2A0xAFNs1Vj2IZfE380LtdWxj_k&ehbc=2E312F" width="640" height="480"", // 在引號中貼上你的 Google Maps Embed API key。
+    googleMapsApiKey: "", // 在引號中貼上你的 Google Maps Embed API key。
   },
 
   supabase: {
