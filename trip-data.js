@@ -1,3 +1,27 @@
+  supabase: {
+    enabled: true,
+    projectUrl: "https://mttbgxymvjkkouccfztn.supabase.co",
+    publishableKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im10dGJneHltdmpra291Y2NmenRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg4Mzk5MTcsImV4cCI6MjA5NDQxNTkxN30.MvRoQC3axnyH2JcVCYuQcO2hmZD_qRjR5OBqHbpbINs", // ← 記得換成真正的 anon key
+    tableName: "trip_state",
+    rowId: "family-trip",
+  },
+
+  tripSettings: {
+    startDate: "2026-07-18",
+    dayCount: 4,
+  },
+
+  dayColors: ["#d8c79d", "#b9b98d", "#a8b596", "#d6bd80", "#cfc5a5", "#8f9b73"],
+
+  days: [ /* ... 你的 days 內容 */ ],
+
+  defaultOrders: [ /* ... */ ],
+
+  defaultWishes: [ /* ... */ ],
+};
+
+
+
 window.tripConfig = {
   site: {
     browserTitle: "家族旅遊行程",
