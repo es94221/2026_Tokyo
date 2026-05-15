@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>家族旅遊行程</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="回到總覽">
+        <span class="brand-mark">旅</span>
+        <span id="brandText">Family Trip</span>
+      </a>
+      <nav aria-label="主要導覽">
+        <a href="#overall">總覽</a>
+        <a href="#orders">訂單</a>
+        <a href="#wishlist">想去的點</a>
+        <a href="#map">地圖</a>
+        <a href="#photos">照片牆</a>
+      </nav>
+      <span class="sync-status" id="syncStatus">本機儲存</span>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="trip-dates" id="heroKicker">2026 Family Journey</p>
+          <h1 id="hero-title">家族旅遊行程總覽</h1>
+          <p id="heroDescription">
+            把每天的行程、訂單連結、大家想去的地方與旅途中照片放在同一個安靜漂亮的小網頁裡。
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" id="primaryButton" href="#overall">看 Overall Itinerary</a>
+            <a class="button muted" id="secondaryButton" href="#wishlist">新增想去的點</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="map-card">
+            <div class="route-line"></div>
+            <span class="pin p1"></span>
+            <span class="pin p2"></span>
+            <span class="pin p3"></span>
+            <span class="pin p4"></span>
+            <div class="map-note">
+              <strong id="heroDayCount">4 Days</strong>
+              <span id="heroMapNote">food, rest, views, tiny adventures</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="overall" aria-labelledby="overall-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Overall Itinerary</p>
+            <h2 id="overall-title">點選每一天，看詳細行程</h2>
+          </div>
+          <p>每個可點選區塊都使用同一組不飽和土色系，讓長輩和小孩也能很快分辨。</p>
+        </div>
+        <form class="trip-settings-form" id="tripSettingsForm">
+          <label>
+            開始日期
+            <input id="tripStartDate" type="date" required />
+          </label>
+          <label>
+            旅遊天數
+            <input id="tripDayCount" type="number" min="1" max="30" required />
+          </label>
+          <button class="button primary" type="submit">更新日期與天數</button>
+          <button class="button muted" id="clearItinerary" type="button">清空目前行程內容</button>
+        </form>
+        <div class="day-grid" id="dayGrid"></div>
+      </section>
+
+      <section class="section split" id="orders" aria-labelledby="orders-title">
+        <div class="section-heading stacked">
+          <p class="section-kicker">Bookings</p>
+          <h2 id="orders-title">飯店、訂車、活動預約</h2>
+          <p>先放入信箱訂單或雲端檔案連結。若使用 Gmail，也可以貼上搜尋訂單的網址。</p>
+        </div>
+        <form class="order-form" id="orderForm">
+          <label>
+            類型
+            <select id="orderType">
+              <option>飯店</option>
+              <option>訂車</option>
+              <option>活動</option>
+              <option>餐廳</option>
+              <option>交通</option>
+            </select>
+          </label>
+          <label>
+            名稱
+            <input id="orderName" type="text" placeholder="例：湖邊小屋住宿確認信" required />
+          </label>
+          <label>
+            Email / 訂單連結
+            <input id="orderUrl" type="url" placeholder="https://mail.google.com/..." required />
+          </label>
+          <div class="form-actions">
+            <button class="button primary" id="orderSubmit" type="submit">加入訂單</button>
+            <button class="button muted hidden" id="orderCancel" type="button">取消編輯</button>
+          </div>
+        </form>
+        <div class="order-list" id="orderList"></div>
+      </section>
+
+      <section class="section" id="wishlist" aria-labelledby="wishlist-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Family Wishlist</p>
+            <h2 id="wishlist-title">大家想去的點</h2>
+          </div>
+          <p>每個人都可以新增景點、餐廳或休息點，也可以勾選是否排進行程。</p>
+        </div>
+        <form class="wishlist-form" id="wishlistForm">
+          <label>
+            誰想去
+            <input id="wishPerson" type="text" placeholder="例：媽媽" required />
+          </label>
+          <label>
+            地點
+            <input id="wishPlace" type="text" placeholder="例：老城區咖啡店" required />
+          </label>
+          <label>
+            放在哪一天
+            <select id="wishDay"></select>
+          </label>
+          <button class="button primary" type="submit">新增地點</button>
+        </form>
+        <div class="wish-board" id="wishBoard"></div>
+      </section>
+
+      <section class="section map-section" id="map" aria-labelledby="map-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Google Map</p>
+            <h2 id="map-title">旅遊地圖</h2>
+          </div>
+          <p id="mapDescription">
+            把主要住宿、景點或集合地點放在這裡。放入 Google Maps API key 後會顯示互動地圖。
+          </p>
+        </div>
+        <div class="map-shell" id="mapShell"></div>
+      </section>
+
+      <section class="section photos-section" id="photos" aria-labelledby="photos-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Shared Album</p>
+            <h2 id="photos-title">照片牆</h2>
+          </div>
+          <label class="upload-tile">
+            <input id="photoInput" type="file" accept="image/*" multiple />
+            <span>上傳照片</span>
+          </label>
+        </div>
+        <div class="photo-grid" id="photoGrid"></div>
+      </section>
+    </main>
+
+    <aside class="day-panel" id="dayPanel" aria-hidden="true" aria-labelledby="panelTitle">
+      <div class="panel-card">
+        <button class="icon-button" id="closePanel" aria-label="關閉單日行程">×</button>
+        <div id="panelContent"></div>
+      </div>
+    </aside>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./trip-data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
