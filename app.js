@@ -1,7 +1,3 @@
-const config = window.tripConfig;
-if (!config) {
-  throw new Error("trip-data.js 沒有載入，請確認它已經部署到 GitHub 並且檔名正確");
-}
 const defaultOrders = config.defaultOrders;
 const defaultWishes = config.defaultWishes;
 const defaultTripSettings = config.tripSettings;
