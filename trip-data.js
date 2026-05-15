@@ -21,7 +21,7 @@ window.tripConfig = {
   supabase: {
     enabled: true,
     projectUrl: "https://mttbgxymvjkkouccfztn.supabase.co",
-    publishableKey: "sb_publishable_rtTOZndynoEfa902lESLIg_Ii1WVk9C",
+    publishableKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im10dGJneHltdmpra291Y2NmenRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg4Mzk5MTcsImV4cCI6MjA5NDQxNTkxN30.MvRoQC3axnyH2JcVCYuQcO2hmZD_qRjR5OBqHbpbINs",
     tableName: "trip_state",
     rowId: "family-trip",
   },
