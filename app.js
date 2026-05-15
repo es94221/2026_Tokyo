@@ -206,7 +206,7 @@ async function saveState() {
 
   if (error) {
     console.warn("Supabase sync failed:", error);
-    setSyncStatus("雲端同步失敗，已本機儲存", "error");
+    setSyncStatus(`雲端同步失敗：${error.message}`, "error");
     return;
   }
 
