@@ -1,0 +1,66 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Test
+        run: npm test
+
+      - name: Coverage
+        run: npm run test:coverage
+
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: /2026_Tokyo
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
+          NEXT_PUBLIC_SUPABASE_ENABLED: ${{ secrets.NEXT_PUBLIC_SUPABASE_ENABLED }}
+          NEXT_PUBLIC_SUPABASE_TABLE: ${{ secrets.NEXT_PUBLIC_SUPABASE_TABLE }}
+          NEXT_PUBLIC_SUPABASE_ROW_ID: ${{ secrets.NEXT_PUBLIC_SUPABASE_ROW_ID }}
+          NEXT_PUBLIC_MAP_QUERY: ${{ secrets.NEXT_PUBLIC_MAP_QUERY }}
+          NEXT_PUBLIC_MAP_ZOOM: ${{ secrets.NEXT_PUBLIC_MAP_ZOOM }}
+          NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }}
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,185 @@
+{
+  "meta": {
+    "lang": "en",
+    "localeName": "English"
+  },
+  "site": {
+    "browserTitle": "Family Trip",
+    "brandText": "Family Trip",
+    "heroKicker": "2026 Family Journey",
+    "heroTitle": "Family Trip Overview",
+    "heroDescription": "Keep each day's plan, booking links, wishlist spots, and trip photos in one calm, beautiful page.",
+    "primaryButton": "View itinerary",
+    "secondaryButton": "Add a wishlist spot",
+    "mapNote": "food, rest, views, tiny adventures",
+    "heroDayCount": "{count} days"
+  },
+  "nav": {
+    "ariaLabel": "Main navigation",
+    "brandAria": "Back to overview",
+    "overall": "Overview",
+    "orders": "Bookings",
+    "wishlist": "Wishlist",
+    "map": "Map",
+    "photos": "Photos"
+  },
+  "lang": {
+    "switchTo": "中文",
+    "switchAria": "Switch to Chinese"
+  },
+  "auth": {
+    "title": "Sign in to view the trip",
+    "description": "Use a Google account that is on the family allowlist.",
+    "signInGoogle": "Sign in with Google",
+    "signOut": "Sign out",
+    "loading": "Loading…",
+    "signingIn": "Finishing sign-in…",
+    "checkingAccess": "Checking access…",
+    "notAllowedTitle": "Access denied",
+    "callbackFailed": "Sign-in failed. Please try again.",
+    "configMissing": "Supabase is not configured; sign-in is unavailable."
+  },
+  "sync": {
+    "local": "Saved locally",
+    "cloud": "Synced to cloud",
+    "syncing": "Syncing...",
+    "connecting": "Connecting to cloud...",
+    "localPendingCloud": "Cloud unavailable; saved locally",
+    "cloudSyncFailed": "Cloud sync failed: {message}",
+    "cloudConnectFailed": "Cloud connection failed: {message}",
+    "supabaseNotLoaded": "Supabase client not loaded. Check the CDN script in index.html.",
+    "startupError": "Startup error: {message}"
+  },
+  "hero": {
+    "section": "hero"
+  },
+  "overall": {
+    "kicker": "Overall Itinerary",
+    "title": "Tap a day for details",
+    "description": "Each block uses the same muted earth-tone palette so everyone can tell days apart quickly.",
+    "startDate": "Start date",
+    "dayCount": "Trip length (days)",
+    "updateDates": "Update dates & length",
+    "clearItinerary": "Clear itinerary content",
+    "clearConfirm": "Clear all day content? Dates and trip length stay; titles, summaries, cities, stays, and timelines will be emptied.",
+    "summaryEmpty": "No summary for this day yet.",
+    "cityEmpty": "City not set",
+    "stayEmpty": "Stay not set"
+  },
+  "orders": {
+    "kicker": "Bookings",
+    "title": "Hotels, cars & activities",
+    "description": "Add email confirmations or cloud file links. With Gmail, you can paste a search URL for bookings.",
+    "type": "Type",
+    "name": "Name",
+    "namePlaceholder": "e.g. Lakeside cabin confirmation",
+    "url": "Email / booking link",
+    "urlPlaceholder": "https://mail.google.com/...",
+    "add": "Add booking",
+    "save": "Save changes",
+    "cancelEdit": "Cancel edit",
+    "edit": "Edit",
+    "delete": "Delete",
+    "openLink": "Open booking link",
+    "empty": "No booking links yet. Paste a Gmail search link, hotel confirmation, or cloud file."
+  },
+  "orderTypes": {
+    "hotel": "Hotel",
+    "car": "Car / transfer",
+    "activity": "Activity",
+    "restaurant": "Restaurant",
+    "transport": "Transport"
+  },
+  "orderTypeAliases": {
+    "Hotel": "hotel",
+    "Car / transfer": "car",
+    "Activity": "activity",
+    "Restaurant": "restaurant",
+    "Transport": "transport"
+  },
+  "wishlist": {
+    "kicker": "Family Wishlist",
+    "title": "Places we want to go",
+    "description": "Anyone can add sights, restaurants, or rest stops, and mark whether they're on the schedule.",
+    "person": "Who wants to go",
+    "personPlaceholder": "e.g. Mom",
+    "place": "Place",
+    "placePlaceholder": "e.g. Old town café",
+    "day": "Which day",
+    "add": "Add place",
+    "scheduled": "On the itinerary",
+    "empty": "No wishlist spots yet. Everyone can add their own."
+  },
+  "map": {
+    "kicker": "Google Map",
+    "title": "Trip map",
+    "description": "Pin main stays, sights, or meet-up points. Add a Google Maps API key for an interactive map.",
+    "noApiKey": "API key not set",
+    "noApiKeyHelp": "Paste your Google Maps Embed API key in <strong>trip-data.js</strong> under <strong>googleMapsApiKey</strong> to show an interactive map here.",
+    "openMaps": "Open in Google Maps"
+  },
+  "photos": {
+    "kicker": "Shared Album",
+    "title": "Photo wall",
+    "upload": "Upload photos",
+    "alt": "Family trip photo {index}",
+    "deleteAria": "Delete photo",
+    "empty": "Upload trip photos here; this browser keeps previews locally."
+  },
+  "day": {
+    "label": "Day {number}",
+    "displayWithTitle": "Day {number} | {title}",
+    "displayTitleOnly": "Day {number}"
+  },
+  "weekdays": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+  "panel": {
+    "closeAria": "Close day details",
+    "editDay": "Edit this day",
+    "editingDay": "Editing Day {number}",
+    "editTitle": "Edit day itinerary",
+    "editHint": "After saving, the overview and day detail will both update.",
+    "titleAfterDay": "Title after Day {number}",
+    "titlePlaceholder": "e.g. Arrival & slow meet-up",
+    "date": "Date",
+    "dateAuto": "Calculated from start date and trip length",
+    "city": "City / area",
+    "cityPlaceholder": "e.g. Tokyo",
+    "stay": "Stay / status",
+    "stayPlaceholder": "e.g. Hotel name / home / TBD",
+    "color": "Block color",
+    "summary": "Summary",
+    "summaryPlaceholder": "Main theme or reminders for the day",
+    "timeline": "Schedule",
+    "addTime": "Add time slot",
+    "time": "Time",
+    "activity": "Activity",
+    "activityPlaceholder": "Head out after breakfast",
+    "newActivity": "New activity",
+    "delete": "Delete",
+    "saveDay": "Save this day",
+    "cancel": "Cancel",
+    "timelineEmpty": "No times or activities for this day yet.",
+    "bookingsTitle": "Bookings for this day",
+    "wishesTitle": "Wishlist for this day",
+    "wishScheduled": "On itinerary",
+    "wishPending": "To discuss",
+    "wishesEmpty": "No wishlist spots for this day yet.",
+    "bookingsNone": "No booking links yet. Add hotels, cars, or activities in the Bookings section.",
+    "bookingsNoDay": "No bookings tagged Day {day}. Include \"Day {day}\" in the name, e.g. \"Day {day} hotel confirmation\".",
+    "viewAllBookings": "View all bookings"
+  },
+  "legacy": {
+    "sampleTitles": [
+      "Arrival & slow meet-up",
+      "Old town, coffee & stroll",
+      "Nature & activity booking",
+      "Brunch & departure"
+    ],
+    "sampleSummaries": [
+      "Airport transfer, check-in, nearby walk, first dinner together.",
+      "Easy day: old town, cafés, market, photo-friendly alleys.",
+      "Half-day activity, free afternoon for family photos and kids.",
+      "Last-minute shopping and buffer; confirm transport and flights."
+    ]
+  }
+}

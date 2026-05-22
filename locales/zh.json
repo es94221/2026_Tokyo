@@ -1,0 +1,185 @@
+{
+  "meta": {
+    "lang": "zh-Hant",
+    "localeName": "中文"
+  },
+  "site": {
+    "browserTitle": "家族旅遊行程",
+    "brandText": "家族旅遊",
+    "heroKicker": "2026 Family Journey",
+    "heroTitle": "家族旅遊行程總覽",
+    "heroDescription": "把每天的行程、訂單連結、大家想去的地方與旅途中照片放在同一個安靜漂亮的小網頁裡。",
+    "primaryButton": "看 Overall Itinerary",
+    "secondaryButton": "新增想去的點",
+    "mapNote": "food, rest, views, tiny adventures",
+    "heroDayCount": "{count} 天"
+  },
+  "nav": {
+    "ariaLabel": "主要導覽",
+    "brandAria": "回到總覽",
+    "overall": "總覽",
+    "orders": "訂單",
+    "wishlist": "想去的點",
+    "map": "地圖",
+    "photos": "照片牆"
+  },
+  "lang": {
+    "switchTo": "English",
+    "switchAria": "切換為英文"
+  },
+  "auth": {
+    "title": "登入以查看行程",
+    "description": "請使用已加入白名單的 Google 帳號登入。",
+    "signInGoogle": "使用 Google 登入",
+    "signOut": "登出",
+    "loading": "載入中…",
+    "signingIn": "正在完成登入…",
+    "checkingAccess": "正在確認權限…",
+    "notAllowedTitle": "無法存取",
+    "callbackFailed": "登入失敗，請重試。",
+    "configMissing": "Supabase 尚未設定，無法登入。"
+  },
+  "sync": {
+    "local": "本機儲存",
+    "cloud": "雲端已同步",
+    "syncing": "同步中...",
+    "connecting": "連接雲端中...",
+    "localPendingCloud": "尚未連上雲端，已本機儲存",
+    "cloudSyncFailed": "雲端同步失敗：{message}",
+    "cloudConnectFailed": "雲端連接失敗：{message}",
+    "supabaseNotLoaded": "Supabase 套件未載入，請確認 index.html 的 CDN script 已部署",
+    "startupError": "網站啟動錯誤：{message}"
+  },
+  "hero": {
+    "section": "hero"
+  },
+  "overall": {
+    "kicker": "Overall Itinerary",
+    "title": "點選每一天，看詳細行程",
+    "description": "每個可點選區塊都使用同一組不飽和土色系，讓長輩和小孩也能很快分辨。",
+    "startDate": "開始日期",
+    "dayCount": "旅遊天數",
+    "updateDates": "更新日期與天數",
+    "clearItinerary": "清空目前行程內容",
+    "clearConfirm": "確定要清空所有日程內容嗎？日期與天數會保留，標題、摘要、城市、住宿與時間表會清空。",
+    "summaryEmpty": "尚未填寫這一天的摘要。",
+    "cityEmpty": "城市未填",
+    "stayEmpty": "住宿未填"
+  },
+  "orders": {
+    "kicker": "Bookings",
+    "title": "飯店、訂車、活動預約",
+    "description": "先放入信箱訂單或雲端檔案連結。若使用 Gmail，也可以貼上搜尋訂單的網址。",
+    "type": "類型",
+    "name": "名稱",
+    "namePlaceholder": "例：湖邊小屋住宿確認信",
+    "url": "Email / 訂單連結",
+    "urlPlaceholder": "https://mail.google.com/...",
+    "add": "加入訂單",
+    "save": "儲存修改",
+    "cancelEdit": "取消編輯",
+    "edit": "編輯",
+    "delete": "刪除",
+    "openLink": "打開訂單連結",
+    "empty": "還沒有訂單連結。可以先貼 Gmail 搜尋連結、飯店確認頁或雲端檔案。"
+  },
+  "orderTypes": {
+    "hotel": "飯店",
+    "car": "訂車",
+    "activity": "活動",
+    "restaurant": "餐廳",
+    "transport": "交通"
+  },
+  "orderTypeAliases": {
+    "飯店": "hotel",
+    "訂車": "car",
+    "活動": "activity",
+    "餐廳": "restaurant",
+    "交通": "transport"
+  },
+  "wishlist": {
+    "kicker": "Family Wishlist",
+    "title": "大家想去的點",
+    "description": "每個人都可以新增景點、餐廳或休息點，也可以勾選是否排進行程。",
+    "person": "誰想去",
+    "personPlaceholder": "例：媽媽",
+    "place": "地點",
+    "placePlaceholder": "例：老城區咖啡店",
+    "day": "放在哪一天",
+    "add": "新增地點",
+    "scheduled": "已排進行程",
+    "empty": "還沒有想去的點。每個人都可以新增自己的願望清單。"
+  },
+  "map": {
+    "kicker": "Google Map",
+    "title": "旅遊地圖",
+    "description": "把主要住宿、景點或集合地點放在這裡。放入 Google Maps API key 後會顯示互動地圖。",
+    "noApiKey": "尚未設定 API key",
+    "noApiKeyHelp": "在 <strong>trip-data.js</strong> 的 <strong>googleMapsApiKey</strong> 貼上你的 Google Maps Embed API key 後，這裡會自動變成互動地圖。",
+    "openMaps": "先用 Google Maps 打開"
+  },
+  "photos": {
+    "kicker": "Shared Album",
+    "title": "照片牆",
+    "upload": "上傳照片",
+    "alt": "家族旅遊照片 {index}",
+    "deleteAria": "刪除照片",
+    "empty": "旅途中可以把照片上傳到這裡，這台瀏覽器會先記住預覽。"
+  },
+  "day": {
+    "label": "Day {number}",
+    "displayWithTitle": "Day {number}｜{title}",
+    "displayTitleOnly": "Day {number}"
+  },
+  "weekdays": ["週日", "週一", "週二", "週三", "週四", "週五", "週六"],
+  "panel": {
+    "closeAria": "關閉單日行程",
+    "editDay": "編輯這一天",
+    "editingDay": "編輯 Day {number}",
+    "editTitle": "編輯單日行程",
+    "editHint": "修改後按「儲存這一天」，Overall Itinerary 和單日詳情會一起更新。",
+    "titleAfterDay": "Day {number} 後面的標題文字",
+    "titlePlaceholder": "例：抵達與慢慢集合",
+    "date": "日期",
+    "dateAuto": "由 Overall 的開始日期與天數自動計算",
+    "city": "城市/區域",
+    "cityPlaceholder": "例：Tokyo",
+    "stay": "住宿/狀態",
+    "stayPlaceholder": "例：飯店名稱 / 回家 / 待確認",
+    "color": "色塊顏色",
+    "summary": "摘要",
+    "summaryPlaceholder": "寫下這一天的大方向或提醒",
+    "timeline": "時間與行程",
+    "addTime": "新增時間",
+    "time": "時間",
+    "activity": "行程",
+    "activityPlaceholder": "早餐後出門",
+    "newActivity": "新增行程",
+    "delete": "刪除",
+    "saveDay": "儲存這一天",
+    "cancel": "取消",
+    "timelineEmpty": "這一天還沒有新增時間與行程。",
+    "bookingsTitle": "這一天的 Booking 連結",
+    "wishesTitle": "這一天想加入的點",
+    "wishScheduled": "已排入行程",
+    "wishPending": "待討論",
+    "wishesEmpty": "目前還沒有新增想去的點。",
+    "bookingsNone": "目前還沒有 Booking 連結。可以先到 Bookings 區塊新增飯店、訂車或活動預約。",
+    "bookingsNoDay": "目前沒有標記為 Day {day} 的 Booking。新增訂單時可以在名稱寫上「Day {day}」，例如「Day {day} 飯店確認信」。",
+    "viewAllBookings": "查看全部 Bookings"
+  },
+  "legacy": {
+    "sampleTitles": [
+      "抵達與慢慢集合",
+      "老城、咖啡與散步",
+      "自然景點與活動預約",
+      "早午餐與回程"
+    ],
+    "sampleSummaries": [
+      "機場接送、入住、附近散步，晚上一起吃第一餐。",
+      "不趕路的一天：老城區、咖啡店、市集與適合拍照的小巷。",
+      "安排半日活動，下午留白，適合家庭照與小朋友自由活動。",
+      "保留最後採買與彈性時間，確認車班與航班資訊。"
+    ]
+  }
+}

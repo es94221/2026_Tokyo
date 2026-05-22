@@ -1,27 +1,14 @@
 window.tripConfig = {
-  site: {
-    browserTitle: "日本行程",
-    brandText: "Family Trip",
-    heroKicker: "2026 Family Journey",
-    heroTitle: "家族旅遊行程總覽",
-    heroDescription: "把每天的行程、訂單連結、大家想去的地方都放在這裡。",
-    primaryButton: "看 Overall Itinerary",
-    secondaryButton: "新增想去的點",
-    mapNote: "food, rest, views, tiny adventures",
-  },
-
   map: {
-    title: "旅遊地圖",
-    description: "把主要住宿、景點或集合地點放在這裡。放入 Google Maps API key 後會顯示互動地圖。",
     query: "Tokyo, Japan",
     zoom: 12,
-    googleMapsApiKey: "", // 在引號中貼上你的 Google Maps Embed API key。
+    googleMapsApiKey: "",
   },
 
   supabase: {
-    enabled: true,
-    projectUrl: "https://mttbgxymvjkkouccfztn.supabase.co",
-    publishableKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im10dGJneHltdmpra291Y2NmenRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg4Mzk5MTcsImV4cCI6MjA5NDQxNTkxN30.MvRoQC3axnyH2JcVCYuQcO2hmZD_qRjR5OBqHbpbINs",
+    enabled: false,
+    projectUrl: "",
+    publishableKey: "",
     tableName: "trip_state",
     rowId: "family-trip",
   },
@@ -74,17 +61,17 @@ window.tripConfig = {
 
   defaultOrders: [
     {
-      type: "飯店",
+      type: "hotel",
       name: "Day 1-2 湖邊小屋住宿確認信",
       url: "https://mail.google.com/mail/u/0/#search/lake+house+booking",
     },
     {
-      type: "訂車",
+      type: "car",
       name: "機場接送與 Day 3 包車",
       url: "https://mail.google.com/mail/u/0/#search/car+reservation",
     },
     {
-      type: "活動",
+      type: "activity",
       name: "Day 3 自然導覽活動預約",
       url: "https://mail.google.com/mail/u/0/#search/tour+confirmation",
     },
