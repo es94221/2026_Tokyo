@@ -29,7 +29,7 @@ body {
     radial-gradient(circle at 92% 22%, rgba(156, 165, 138, 0.28), transparent 30rem),
     linear-gradient(135deg, #f6f0e7 0%, #efe5d6 100%);
   color: var(--ink);
-  font-family: "Noto Sans TC", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-body), "Noto Sans TC", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 button,
@@ -110,6 +110,29 @@ nav a:hover {
   color: var(--ink);
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.lang-toggle {
+  min-height: 2.2rem;
+  border: 1px solid rgba(69, 57, 45, 0.16);
+  border-radius: 0.45rem;
+  padding: 0.35rem 0.65rem;
+  background: rgba(255, 250, 240, 0.72);
+  color: var(--umber);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.lang-toggle:hover {
+  background: rgba(156, 165, 138, 0.28);
+}
+
 .sync-status {
   border: 1px solid rgba(69, 57, 45, 0.14);
   border-radius: 0.45rem;
@@ -179,7 +202,7 @@ h2 {
 
 h1 {
   margin-bottom: 1.2rem;
-  font-family: "Playfair Display", "Noto Sans TC", serif;
+  font-family: var(--font-display), "Playfair Display", "Noto Sans TC", serif;
   font-size: clamp(3.2rem, 8vw, 7.2rem);
   line-height: 0.92;
 }
@@ -831,6 +854,11 @@ textarea:focus {
     position: static;
   }
 
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
   nav {
     justify-content: flex-start;
   }
@@ -853,4 +881,85 @@ textarea:focus {
   .day-card {
     min-height: 14rem;
   }
+}
+
+.auth-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem clamp(1rem, 5vw, 4rem);
+  background: linear-gradient(135deg, var(--umber) 0%, var(--moss) 100%);
+  border-bottom: 1px solid rgba(255, 250, 240, 0.14);
+  box-shadow: 0 8px 24px rgba(59, 48, 35, 0.12);
+  color: var(--cream);
+}
+
+.auth-brand {
+  color: var(--cream);
+}
+
+.auth-brand .brand-mark {
+  background: rgba(255, 250, 240, 0.18);
+  color: var(--cream);
+  border: 1px solid rgba(255, 250, 240, 0.22);
+}
+
+.auth-lang-toggle {
+  background: rgba(255, 250, 240, 0.14);
+  border-color: rgba(255, 250, 240, 0.32);
+  color: var(--cream);
+}
+
+.auth-lang-toggle:hover {
+  background: rgba(255, 250, 240, 0.26);
+  color: var(--cream);
+}
+
+.auth-screen {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+}
+
+.auth-card {
+  max-width: 26rem;
+  width: 100%;
+  padding: 2rem 1.75rem;
+  border-radius: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+}
+
+.auth-card h1 {
+  font-family: var(--font-display), serif;
+  font-size: 1.5rem;
+  margin: 0 0 0.75rem;
+}
+
+.auth-card p {
+  margin: 0 0 1.25rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.auth-card .button {
+  width: 100%;
+}
+
+.header-sign-out {
+  margin-right: 0.5rem;
 }

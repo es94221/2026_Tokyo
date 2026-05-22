@@ -1,3 +1,4 @@
+-- Trip state (single shared document)
 create table if not exists public.trip_state (
   id text primary key,
   trip_settings jsonb not null default '{}'::jsonb,
@@ -11,30 +12,87 @@ create table if not exists public.trip_state (
 alter table public.trip_state
 add column if not exists trip_settings jsonb not null default '{}'::jsonb;
 
-grant usage on schema public to anon;
-grant select, insert, update on public.trip_state to anon;
+-- Family allowlist (manage rows in Supabase Table Editor or SQL)
+create table if not exists public.allowed_emails (
+  email text primary key,
+  created_at timestamptz not null default now()
+);
+
+comment on table public.allowed_emails is
+  'Google account emails allowed to use the trip app. Add one row per family member (lowercase recommended).';
+
+-- Example: insert into public.allowed_emails (email) values ('you@gmail.com');
 
 alter table public.trip_state enable row level security;
+alter table public.allowed_emails enable row level security;
+
+-- Remove direct table access for unauthenticated (publishable key, no session) requests
+revoke all on table public.trip_state from anon;
+revoke all on table public.allowed_emails from anon;
 
 drop policy if exists "Anyone can read trip state" on public.trip_state;
 drop policy if exists "Anyone can insert trip state" on public.trip_state;
 drop policy if exists "Anyone can update trip state" on public.trip_state;
 
-create policy "Anyone can read trip state"
+grant usage on schema public to authenticated;
+grant select, insert, update on table public.trip_state to authenticated;
+grant select on table public.allowed_emails to authenticated;
+
+-- Authenticated users can check whether their own email is allowlisted
+drop policy if exists "Users read own allowlist row" on public.allowed_emails;
+create policy "Users read own allowlist row"
+on public.allowed_emails
+for select
+to authenticated
+using (lower(email) = lower((select auth.jwt() ->> 'email')));
+
+-- Trip data: allowlisted emails only
+drop policy if exists "Allowlisted read trip" on public.trip_state;
+create policy "Allowlisted read trip"
 on public.trip_state
 for select
-to anon
-using (id = 'family-trip');
+to authenticated
+using (
+  id = 'family-trip'
+  and exists (
+    select 1
+    from public.allowed_emails ae
+    where lower(ae.email) = lower((select auth.jwt() ->> 'email'))
+  )
+);
 
-create policy "Anyone can insert trip state"
+drop policy if exists "Allowlisted insert trip" on public.trip_state;
+create policy "Allowlisted insert trip"
 on public.trip_state
 for insert
-to anon
-with check (id = 'family-trip');
+to authenticated
+with check (
+  id = 'family-trip'
+  and exists (
+    select 1
+    from public.allowed_emails ae
+    where lower(ae.email) = lower((select auth.jwt() ->> 'email'))
+  )
+);
 
-create policy "Anyone can update trip state"
+drop policy if exists "Allowlisted update trip" on public.trip_state;
+create policy "Allowlisted update trip"
 on public.trip_state
 for update
-to anon
-using (id = 'family-trip')
-with check (id = 'family-trip');
+to authenticated
+using (
+  id = 'family-trip'
+  and exists (
+    select 1
+    from public.allowed_emails ae
+    where lower(ae.email) = lower((select auth.jwt() ->> 'email'))
+  )
+)
+with check (
+  id = 'family-trip'
+  and exists (
+    select 1
+    from public.allowed_emails ae
+    where lower(ae.email) = lower((select auth.jwt() ->> 'email'))
+  )
+);
