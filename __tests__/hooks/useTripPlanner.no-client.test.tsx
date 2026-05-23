@@ -26,7 +26,7 @@ vi.mock("@/lib/config", async (importOriginal) => {
 
 describe("useTripPlanner without supabase client", () => {
   it("reports supabase not loaded", async () => {
-    const { result } = renderHook(() => useTripPlanner(), {
+    const { result } = renderHook(() => useTripPlanner("family-trip"), {
       wrapper: ({ children }) => <LocaleProvider>{children}</LocaleProvider>,
     });
 

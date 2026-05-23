@@ -1,3 +1,19 @@
+export type TripStatus = "planning" | "active" | "past";
+
+export interface TripMeta {
+  id: string;
+  name: string;
+  status: TripStatus;
+  startDate: string;
+  dayCount: number;
+  createdAt: string;
+}
+
+export interface TripRegistry {
+  trips: TripMeta[];
+  activeTripId: string | null;
+}
+
 export type OrderTypeKey = "hotel" | "car" | "activity" | "restaurant" | "transport";
 
 export type LocaleCode = "zh" | "en";

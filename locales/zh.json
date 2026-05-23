@@ -39,6 +39,31 @@
     "callbackFailed": "登入失敗，請重試。",
     "configMissing": "Supabase 尚未設定，無法登入。"
   },
+  "hub": {
+    "kicker": "Family trips",
+    "title": "選擇或規劃行程",
+    "description": "進行中的行程在這裡記錄每一天；也可以規劃新旅程，或回顧過去的旅行。",
+    "currentTitle": "進行中的行程",
+    "planTitle": "規劃新行程",
+    "pastTitle": "過去的行程",
+    "noCurrent": "目前沒有標記為進行中的行程。從下方規劃中選一個並設為進行中。",
+    "noPlanning": "還沒有規劃中的行程。輸入名稱開始規劃。",
+    "noPast": "還沒有已結束的行程。",
+    "newTripPlaceholder": "例如：2027 京都家族旅行",
+    "createTrip": "開始規劃",
+    "openTrip": "開啟行程",
+    "setActive": "設為進行中",
+    "markPast": "標記為已結束",
+    "backToTrips": "所有行程",
+    "defaultTripName": "2026 東京家族旅行",
+    "untitledTrip": "未命名行程",
+    "tripDates": "出發 {start} · {count} 天",
+    "status": {
+      "planning": "規劃中",
+      "active": "進行中",
+      "past": "已結束"
+    }
+  },
   "sync": {
     "local": "本機儲存",
     "cloud": "雲端已同步",

@@ -21,6 +21,7 @@ import { parseWishDayNumber } from "@/lib/dates";
 import { normalizeOrderType } from "@/lib/i18n-utils";
 import { storage } from "@/lib/storage";
 import { getSupabaseClient } from "@/lib/supabase-client";
+import { tripStorageKeys } from "@/lib/trip-registry";
 import type {
   Order,
   SyncMessageKey,
@@ -33,8 +34,9 @@ import { useLocale } from "@/contexts/LocaleContext";
 
 type PanelMode = { type: "view"; index: number } | { type: "edit"; index: number } | null;
 
-export function useTripPlanner() {
+export function useTripPlanner(tripId: string) {
   const { t, messages, formatOrderType } = useLocale();
+  const keys = useMemo(() => tripStorageKeys(tripId), [tripId]);
 
   const [tripSettings, setTripSettings] = useState<TripSettings>(defaultTripSettings);
   const [days, setDays] = useState<TripDay[]>(defaultDays);
@@ -86,13 +88,13 @@ export function useTripPlanner() {
       const nextOrders = next.orders ?? orders;
       const nextWishes = next.wishes ?? wishes;
       const nextPhotos = next.photos ?? photos;
-      storage.set("family-trip-settings", settings);
-      storage.set("family-trip-days", nextDays);
-      storage.set("family-trip-orders", nextOrders);
-      storage.set("family-trip-wishes", nextWishes);
-      storage.set("family-trip-photos", nextPhotos);
+      storage.set(keys.settings, settings);
+      storage.set(keys.days, nextDays);
+      storage.set(keys.orders, nextOrders);
+      storage.set(keys.wishes, nextWishes);
+      storage.set(keys.photos, nextPhotos);
     },
-    [tripSettings, days, orders, wishes, photos],
+    [keys, tripSettings, days, orders, wishes, photos],
   );
 
   const getPayload = useCallback(
@@ -103,7 +105,7 @@ export function useTripPlanner() {
       wishes: Wish[];
       photos: string[];
     }) => ({
-      id: tripConfig.supabase.rowId,
+      id: tripId,
       trip_settings: state.tripSettings,
       days: state.days,
       orders: state.orders,
@@ -111,7 +113,7 @@ export function useTripPlanner() {
       photos: state.photos,
       updated_at: new Date().toISOString(),
     }),
-    [],
+    [tripId],
   );
 
   const saveState = useCallback(
@@ -196,7 +198,7 @@ export function useTripPlanner() {
     const { data, error } = await client
       .from(tripConfig.supabase.tableName)
       .select("trip_settings, days, orders, wishes, photos")
-      .eq("id", tripConfig.supabase.rowId)
+      .eq("id", tripId)
       .maybeSingle();
 
     if (error) {
@@ -233,16 +235,20 @@ export function useTripPlanner() {
     }
 
     await saveState();
-  }, [tripSettings, days, orders, wishes, photos, applySyncedDays, saveLocal, saveState, setStatus]);
+  }, [tripId, tripSettings, days, orders, wishes, photos, applySyncedDays, saveLocal, saveState, setStatus]);
 
   useEffect(() => {
-    const settings = storage.get("family-trip-settings", defaultTripSettings);
-    const loadedDays = storage.get("family-trip-days", defaultDays);
+    setHydrated(false);
+    setCloudReady(false);
+    const hasExisting =
+      typeof window !== "undefined" && localStorage.getItem(keys.settings) !== null;
+    const settings = storage.get(keys.settings, defaultTripSettings);
+    const loadedDays = storage.get(keys.days, hasExisting ? defaultDays : []);
     const loadedOrders = storage
-      .get("family-trip-orders", defaultOrders)
+      .get(keys.orders, hasExisting ? defaultOrders : [])
       .map((o: Order) => ({ ...o, type: normalizeOrderType(o.type) }));
-    const loadedWishes = storage.get("family-trip-wishes", defaultWishes);
-    const loadedPhotos = storage.get("family-trip-photos", []);
+    const loadedWishes = storage.get(keys.wishes, hasExisting ? defaultWishes : []);
+    const loadedPhotos = storage.get(keys.photos, []);
 
     const synced = syncDaysWithTripSettings(loadedDays, settings, messages);
     setTripSettings(synced.tripSettings);
@@ -250,8 +256,10 @@ export function useTripPlanner() {
     setOrders(loadedOrders);
     setWishes(loadedWishes);
     setPhotos(loadedPhotos);
+    setPanelMode(null);
+    setEditingOrderIndex(null);
     setHydrated(true);
-  }, [messages]);
+  }, [tripId, keys, messages]);
 
   useEffect(() => {
     if (!hydrated) return;

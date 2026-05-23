@@ -46,15 +46,14 @@ for select
 to authenticated
 using (lower(email) = lower((select auth.jwt() ->> 'email')));
 
--- Trip data: allowlisted emails only
+-- Trip data: allowlisted emails only (any trip id, including __registry__)
 drop policy if exists "Allowlisted read trip" on public.trip_state;
 create policy "Allowlisted read trip"
 on public.trip_state
 for select
 to authenticated
 using (
-  id = 'family-trip'
-  and exists (
+  exists (
     select 1
     from public.allowed_emails ae
     where lower(ae.email) = lower((select auth.jwt() ->> 'email'))
@@ -67,8 +66,7 @@ on public.trip_state
 for insert
 to authenticated
 with check (
-  id = 'family-trip'
-  and exists (
+  exists (
     select 1
     from public.allowed_emails ae
     where lower(ae.email) = lower((select auth.jwt() ->> 'email'))
@@ -81,16 +79,14 @@ on public.trip_state
 for update
 to authenticated
 using (
-  id = 'family-trip'
-  and exists (
+  exists (
     select 1
     from public.allowed_emails ae
     where lower(ae.email) = lower((select auth.jwt() ->> 'email'))
   )
 )
 with check (
-  id = 'family-trip'
-  and exists (
+  exists (
     select 1
     from public.allowed_emails ae
     where lower(ae.email) = lower((select auth.jwt() ->> 'email'))
