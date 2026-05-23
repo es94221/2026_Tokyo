@@ -149,7 +149,9 @@
     "upload": "Upload photos",
     "alt": "Family trip photo {index}",
     "deleteAria": "Delete photo",
-    "empty": "Upload trip photos here; this browser keeps previews locally."
+    "empty": "Upload trip photos here. Signed-in family members sync photos to cloud storage.",
+    "uploading": "Uploading…",
+    "uploadFailed": "Could not upload photos. Check your connection and try again."
   },
   "day": {
     "label": "Day {number}",

@@ -20,6 +20,7 @@ import {
 import { parseWishDayNumber } from "@/lib/dates";
 import { normalizeOrderType } from "@/lib/i18n-utils";
 import { storage } from "@/lib/storage";
+import { uploadTripPhotos, deleteStoredPhoto } from "@/lib/photo-storage";
 import { getSupabaseClient } from "@/lib/supabase-client";
 import { tripStorageKeys } from "@/lib/trip-registry";
 import type {
@@ -392,16 +393,20 @@ export function useTripPlanner(tripId: string) {
   );
 
   const addPhotos = useCallback(
-    async (newPhotos: string[]) => {
-      const next = [...newPhotos, ...photos].slice(0, 30);
+    async (files: File[]) => {
+      if (!files.length) return;
+      const uploaded = await uploadTripPhotos(tripId, files);
+      const next = [...uploaded, ...photos].slice(0, 30);
       setPhotos(next);
       await saveState({ photos: next });
     },
-    [photos, saveState],
+    [tripId, photos, saveState],
   );
 
   const deletePhoto = useCallback(
     async (index: number) => {
+      const ref = photos[index];
+      if (ref) await deleteStoredPhoto(ref);
       const next = photos.filter((_, i) => i !== index);
       setPhotos(next);
       await saveState({ photos: next });
