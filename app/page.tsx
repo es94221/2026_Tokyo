@@ -1,12 +1,12 @@
 "use client";
 
 import { AuthGate } from "@/components/trip/AuthGate";
-import { TripPlanner } from "@/components/trip/TripPlanner";
+import { TripApp } from "@/components/trip/TripApp";
 
 export default function HomePage() {
   return (
     <AuthGate>
-      <TripPlanner />
+      <TripApp />
     </AuthGate>
   );
 }

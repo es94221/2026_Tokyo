@@ -39,6 +39,31 @@
     "callbackFailed": "Sign-in failed. Please try again.",
     "configMissing": "Supabase is not configured; sign-in is unavailable."
   },
+  "hub": {
+    "kicker": "Family trips",
+    "title": "Pick or plan a trip",
+    "description": "Document the trip in progress, start planning the next one, or revisit past journeys.",
+    "currentTitle": "Current trip",
+    "planTitle": "Plan a new trip",
+    "pastTitle": "Past trips",
+    "noCurrent": "No trip is marked as current. Set one from planning below.",
+    "noPlanning": "No trips in planning yet. Enter a name to start.",
+    "noPast": "No past trips yet.",
+    "newTripPlaceholder": "e.g. 2027 Kyoto family trip",
+    "createTrip": "Start planning",
+    "openTrip": "Open trip",
+    "setActive": "Set as current",
+    "markPast": "Mark as past",
+    "backToTrips": "All trips",
+    "defaultTripName": "2026 Tokyo family trip",
+    "untitledTrip": "Untitled trip",
+    "tripDates": "Starts {start} · {count} days",
+    "status": {
+      "planning": "Planning",
+      "active": "Current",
+      "past": "Past"
+    }
+  },
   "sync": {
     "local": "Saved locally",
     "cloud": "Synced to cloud",

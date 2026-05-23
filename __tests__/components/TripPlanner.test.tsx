@@ -20,9 +20,16 @@ vi.mock("@/lib/config", async (importOriginal) => {
   };
 });
 
+const plannerProps = {
+  tripId: "family-trip",
+  tripName: "2026 Tokyo",
+  tripStatus: "active" as const,
+  onBackToHub: vi.fn(),
+};
+
 describe("TripPlanner", () => {
   it("renders main sections after hydration", async () => {
-    await renderWithLocale(<TripPlanner />);
+    await renderWithLocale(<TripPlanner {...plannerProps} />);
 
     await waitFor(() => {
       expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
@@ -37,7 +44,7 @@ describe("TripPlanner", () => {
 
   it("retries sync when status is clicked in error state", async () => {
     const user = userEvent.setup();
-    await renderWithLocale(<TripPlanner />);
+    await renderWithLocale(<TripPlanner {...plannerProps} />);
 
     await waitFor(() => {
       expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();

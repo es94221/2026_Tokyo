@@ -73,7 +73,7 @@ describe("useTripPlanner cloud sync", () => {
       error: null,
     });
 
-    const { result } = renderHook(() => useTripPlanner(), { wrapper });
+    const { result } = renderHook(() => useTripPlanner("family-trip"), { wrapper });
 
     await waitFor(() => expect(result.current.hydrated).toBe(true));
     await waitFor(() => {
@@ -95,7 +95,7 @@ describe("useTripPlanner cloud sync", () => {
     });
     upsertMock.mockResolvedValue({ error: null });
 
-    const { result } = renderHook(() => useTripPlanner(), { wrapper });
+    const { result } = renderHook(() => useTripPlanner("family-trip"), { wrapper });
     await waitFor(() => expect(result.current.hydrated).toBe(true));
     await waitFor(() => expect(result.current.syncStatus).toBe("cloud"));
 
@@ -119,7 +119,7 @@ describe("useTripPlanner cloud sync", () => {
       error: { message: "network down" },
     });
 
-    const { result } = renderHook(() => useTripPlanner(), { wrapper });
+    const { result } = renderHook(() => useTripPlanner("family-trip"), { wrapper });
     await waitFor(() => expect(result.current.hydrated).toBe(true));
     await waitFor(() => {
       expect(result.current.syncStatus).toBe("error");
@@ -140,7 +140,7 @@ describe("useTripPlanner cloud sync", () => {
     });
     upsertMock.mockResolvedValue({ error: { message: "write failed" } });
 
-    const { result } = renderHook(() => useTripPlanner(), { wrapper });
+    const { result } = renderHook(() => useTripPlanner("family-trip"), { wrapper });
     await waitFor(() => expect(result.current.syncStatus).toBe("cloud"));
 
     await act(async () => {
@@ -173,7 +173,7 @@ describe("useTripPlanner cloud sync", () => {
       });
     upsertMock.mockResolvedValue({ error: null });
 
-    const { result } = renderHook(() => useTripPlanner(), { wrapper });
+    const { result } = renderHook(() => useTripPlanner("family-trip"), { wrapper });
     await waitFor(() => expect(result.current.syncStatus).toBe("error"));
 
     await act(async () => {

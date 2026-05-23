@@ -1,5 +1,6 @@
 "use client";
 
+import type { TripStatus } from "@/lib/types";
 import { useTripPlanner } from "@/hooks/useTripPlanner";
 import { Header } from "@/components/trip/Header";
 import { Hero } from "@/components/trip/Hero";
@@ -10,8 +11,15 @@ import { MapSection } from "@/components/trip/MapSection";
 import { PhotosSection } from "@/components/trip/PhotosSection";
 import { DayPanel } from "@/components/trip/DayPanel";
 
-export function TripPlanner() {
-  const planner = useTripPlanner();
+type TripPlannerProps = {
+  tripId: string;
+  tripName: string;
+  tripStatus?: TripStatus;
+  onBackToHub: () => void;
+};
+
+export function TripPlanner({ tripId, tripName, tripStatus, onBackToHub }: TripPlannerProps) {
+  const planner = useTripPlanner(tripId);
 
   if (!planner.hydrated) {
     return null;
@@ -30,9 +38,11 @@ export function TripPlanner() {
         syncMessage={planner.syncMessage}
         syncStatus={planner.syncStatus}
         onSyncClick={handleSyncClick}
+        tripName={tripName}
+        onBackToHub={onBackToHub}
       />
       <main id="top">
-        <Hero dayCount={planner.tripSettings.dayCount} />
+        <Hero dayCount={planner.tripSettings.dayCount} tripName={tripName} tripStatus={tripStatus} />
         <OverallSection
           tripSettings={planner.tripSettings}
           days={planner.days}

@@ -963,3 +963,153 @@ textarea:focus {
 .header-sign-out {
   margin-right: 0.5rem;
 }
+
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.header-back {
+  flex-shrink: 0;
+  padding: 0.45rem 0.7rem;
+  font-size: 0.78rem;
+}
+
+.trip-hub {
+  width: min(48rem, 100%);
+  text-align: left;
+}
+
+.auth-screen:has(.trip-hub) {
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-top: 1.5rem;
+}
+
+.trip-hub-intro h1 {
+  font-family: var(--font-display), serif;
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  margin: 0.35rem 0 0.75rem;
+}
+
+.trip-hub-intro p {
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0 0 1.5rem;
+}
+
+.trip-hub-section {
+  margin-bottom: 2rem;
+}
+
+.trip-hub-section h2 {
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--umber);
+  margin: 0 0 0.85rem;
+}
+
+.trip-hub-empty {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.trip-create-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.trip-create-form input {
+  flex: 1 1 14rem;
+  min-height: 2.6rem;
+  border: 1px solid var(--line);
+  border-radius: 0.55rem;
+  padding: 0.55rem 0.75rem;
+  background: rgba(255, 250, 240, 0.9);
+}
+
+.trip-card-grid {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.trip-card {
+  padding: 1.1rem 1.15rem;
+  border-radius: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-soft);
+}
+
+.trip-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.45rem;
+}
+
+.trip-card-head h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.trip-card-meta {
+  margin: 0 0 0.85rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.trip-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.trip-card-actions .button {
+  width: auto;
+}
+
+.trip-status {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.trip-status-planning {
+  background: rgba(215, 189, 135, 0.35);
+  color: var(--umber);
+}
+
+.trip-status-active {
+  background: rgba(111, 124, 93, 0.28);
+  color: var(--moss);
+}
+
+.trip-status-past {
+  background: rgba(128, 99, 75, 0.14);
+  color: var(--muted);
+}
+
+.hero-copy .trip-status {
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .trip-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

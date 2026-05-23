@@ -38,8 +38,8 @@ describe("useTripPlanner", () => {
   });
 
   it("hydrates from localStorage", async () => {
-    storage.set("family-trip-settings", { startDate: "2026-07-01", dayCount: 2 });
-    storage.set("family-trip-days", [
+    storage.set("trip:family-trip:settings", { startDate: "2026-07-01", dayCount: 2 });
+    storage.set("trip:family-trip:days", [
       {
         title: "Beach",
         date: "7/1 Wed",
@@ -51,7 +51,7 @@ describe("useTripPlanner", () => {
       },
     ] as TripDay[]);
 
-    const { result } = renderHook(() => useTripPlanner(), { wrapper });
+    const { result } = renderHook(() => useTripPlanner("family-trip"), { wrapper });
 
     await waitFor(() => {
       expect(result.current.hydrated).toBe(true);
@@ -61,7 +61,7 @@ describe("useTripPlanner", () => {
   });
 
   it("updates trip settings and filters wishes beyond day count", async () => {
-    const { result } = renderHook(() => useTripPlanner(), { wrapper });
+    const { result } = renderHook(() => useTripPlanner("family-trip"), { wrapper });
     await waitFor(() => expect(result.current.hydrated).toBe(true));
 
     await act(async () => {
@@ -82,9 +82,9 @@ describe("useTripPlanner", () => {
   });
 
   it("manages orders, wishes, and photos", async () => {
-    storage.set("family-trip-orders", []);
-    storage.set("family-trip-wishes", []);
-    const { result } = renderHook(() => useTripPlanner(), { wrapper });
+    storage.set("trip:family-trip:orders", []);
+    storage.set("trip:family-trip:wishes", []);
+    const { result } = renderHook(() => useTripPlanner("family-trip"), { wrapper });
     await waitFor(() => expect(result.current.hydrated).toBe(true));
     expect(result.current.orders).toHaveLength(0);
     expect(result.current.wishes).toHaveLength(0);
@@ -142,7 +142,7 @@ describe("useTripPlanner", () => {
   });
 
   it("opens panel, saves day edit, and clears itinerary", async () => {
-    const { result } = renderHook(() => useTripPlanner(), { wrapper });
+    const { result } = renderHook(() => useTripPlanner("family-trip"), { wrapper });
     await waitFor(() => expect(result.current.hydrated).toBe(true));
 
     await act(async () => {
@@ -180,7 +180,7 @@ describe("useTripPlanner", () => {
   });
 
   it("matches orders to day numbers", async () => {
-    const { result } = renderHook(() => useTripPlanner(), { wrapper });
+    const { result } = renderHook(() => useTripPlanner("family-trip"), { wrapper });
     await waitFor(() => expect(result.current.hydrated).toBe(true));
 
     await act(async () => {
@@ -196,7 +196,7 @@ describe("useTripPlanner", () => {
   });
 
   it("clears legacy sample itinerary after hydration", async () => {
-    storage.set("family-trip-days", [
+    storage.set("trip:family-trip:days", [
       {
         title: "抵達與慢慢集合",
         date: "6/22 週一",
@@ -208,7 +208,7 @@ describe("useTripPlanner", () => {
       },
     ] as TripDay[]);
 
-    const { result } = renderHook(() => useTripPlanner(), { wrapper });
+    const { result } = renderHook(() => useTripPlanner("family-trip"), { wrapper });
     await waitFor(() => expect(result.current.hydrated).toBe(true));
     await waitFor(() => {
       expect(result.current.days[0].summary).toBe("");
@@ -216,7 +216,7 @@ describe("useTripPlanner", () => {
   });
 
   it("reports local-only status when supabase disabled", async () => {
-    const { result } = renderHook(() => useTripPlanner(), { wrapper });
+    const { result } = renderHook(() => useTripPlanner("family-trip"), { wrapper });
     await waitFor(() => expect(result.current.hydrated).toBe(true));
     await waitFor(() => {
       expect(result.current.syncMessage).toBeTruthy();

@@ -15,18 +15,33 @@ type HeaderProps = {
   syncMessage: string;
   syncStatus: string;
   onSyncClick: () => void;
+  tripName?: string;
+  onBackToHub?: () => void;
 };
 
-export function Header({ syncMessage, syncStatus, onSyncClick }: HeaderProps) {
+export function Header({
+  syncMessage,
+  syncStatus,
+  onSyncClick,
+  tripName,
+  onBackToHub,
+}: HeaderProps) {
   const { authRequired, signOut } = useAuth();
   const { t, switchLocale } = useLocale();
 
   return (
     <header className="site-header">
-      <a className="brand" href="#top" aria-label={t("nav.brandAria")}>
-        <span className="brand-mark">旅</span>
-        <span>{t("site.brandText")}</span>
-      </a>
+      <div className="brand-group">
+        {onBackToHub && (
+          <button className="button muted header-back" type="button" onClick={onBackToHub}>
+            {t("hub.backToTrips")}
+          </button>
+        )}
+        <a className="brand" href="#top" aria-label={t("nav.brandAria")}>
+          <span className="brand-mark">旅</span>
+          <span>{tripName ?? t("site.brandText")}</span>
+        </a>
+      </div>
       <nav aria-label={t("nav.ariaLabel")}>
         {NAV.map((item) => (
           <a key={item.key} href={item.href}>
