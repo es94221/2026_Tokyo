@@ -63,7 +63,27 @@ Open the URL `serve` prints (paths include `/2026_Tokyo/`).
 
 ## Verify after deploy
 
-- [ ] https://es94221.github.io/2026_Tokyo/ loads
+- [ ] https://es94221.github.io/2026_Tokyo/ loads the **trip app** (login screen), not README markdown
 - [ ] Google sign-in completes and returns to the app
 - [ ] Map embed works
 - [ ] Logged-out / non-allowlisted users cannot sync trip data
+
+## Troubleshooting
+
+### Site shows README.md instead of the app
+
+Two workflows exist in **Actions**:
+
+| Workflow | What it does |
+|----------|----------------|
+| **Deploy to GitHub Pages** | Builds Next.js → uploads `out/` → correct deploy |
+| **pages build and deployment** | GitHub’s default Jekyll deploy from the **branch** → renders README |
+
+**Fix:**
+
+1. **Settings → Pages → Build and deployment → Source** must be **GitHub Actions** (not “Deploy from a branch”).
+2. **Actions → Deploy to GitHub Pages → Run workflow** (re-run after changing the setting).
+
+If **Deploy to GitHub Pages** failed with `Failed to create deployment (status: 404)`, Pages was not set to GitHub Actions yet — fix step 1, then re-run.
+
+The build step itself may have succeeded (artifact ~4 MB); only the deploy step failed.
