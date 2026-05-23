@@ -92,3 +92,72 @@ with check (
     where lower(ae.email) = lower((select auth.jwt() ->> 'email'))
   )
 );
+
+-- Trip photos bucket (private; name must match NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET)
+insert into storage.buckets (id, name, public)
+values ('trip-photos', 'trip-photos', false)
+on conflict (id) do update set public = excluded.public;
+
+drop policy if exists "Allowlisted read trip photos" on storage.objects;
+create policy "Allowlisted read trip photos"
+on storage.objects
+for select
+to authenticated
+using (
+  bucket_id = 'trip-photos'
+  and exists (
+    select 1
+    from public.allowed_emails ae
+    where lower(ae.email) = lower((select auth.jwt() ->> 'email'))
+  )
+);
+
+drop policy if exists "Allowlisted upload trip photos" on storage.objects;
+create policy "Allowlisted upload trip photos"
+on storage.objects
+for insert
+to authenticated
+with check (
+  bucket_id = 'trip-photos'
+  and exists (
+    select 1
+    from public.allowed_emails ae
+    where lower(ae.email) = lower((select auth.jwt() ->> 'email'))
+  )
+);
+
+drop policy if exists "Allowlisted update trip photos" on storage.objects;
+create policy "Allowlisted update trip photos"
+on storage.objects
+for update
+to authenticated
+using (
+  bucket_id = 'trip-photos'
+  and exists (
+    select 1
+    from public.allowed_emails ae
+    where lower(ae.email) = lower((select auth.jwt() ->> 'email'))
+  )
+)
+with check (
+  bucket_id = 'trip-photos'
+  and exists (
+    select 1
+    from public.allowed_emails ae
+    where lower(ae.email) = lower((select auth.jwt() ->> 'email'))
+  )
+);
+
+drop policy if exists "Allowlisted delete trip photos" on storage.objects;
+create policy "Allowlisted delete trip photos"
+on storage.objects
+for delete
+to authenticated
+using (
+  bucket_id = 'trip-photos'
+  and exists (
+    select 1
+    from public.allowed_emails ae
+    where lower(ae.email) = lower((select auth.jwt() ->> 'email'))
+  )
+);

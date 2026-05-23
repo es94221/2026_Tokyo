@@ -13,6 +13,17 @@ vi.mock("@/lib/supabase-client", () => ({
   resetSupabaseClientForTests: vi.fn(),
 }));
 
+vi.mock("@/lib/photo-storage", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@/lib/photo-storage")>();
+  return {
+    ...actual,
+    uploadTripPhotos: vi.fn(async (_tripId: string, files: File[]) =>
+      files.map(() => "data:image/png;base64,abc"),
+    ),
+    deleteStoredPhoto: vi.fn(),
+  };
+});
+
 vi.mock("@/lib/config", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@/lib/config")>();
   return {
@@ -132,7 +143,9 @@ describe("useTripPlanner", () => {
     });
 
     await act(async () => {
-      await result.current.addPhotos(["data:image/png;base64,abc"]);
+      await result.current.addPhotos([
+        new File(["pixels"], "trip.png", { type: "image/png" }),
+      ]);
     });
     expect(result.current.photos).toHaveLength(1);
     await act(async () => {

@@ -21,9 +21,11 @@ describe("config defaults", () => {
     expect(dayColorPalette.length).toBeGreaterThan(0);
   });
 
-  it("reads map and supabase config from env with fallbacks", () => {
+  it("reads map, supabase, and storage config from env with fallbacks", () => {
     expect(tripConfig.map.query).toBeTruthy();
     expect(tripConfig.supabase.tableName).toBeTruthy();
     expect(typeof tripConfig.supabase.enabled).toBe("boolean");
+    expect(tripConfig.storage.bucket).toBeTruthy();
+    expect(typeof tripConfig.storage.enabled).toBe("boolean");
   });
 });

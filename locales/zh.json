@@ -149,7 +149,9 @@
     "upload": "上傳照片",
     "alt": "家族旅遊照片 {index}",
     "deleteAria": "刪除照片",
-    "empty": "旅途中可以把照片上傳到這裡，這台瀏覽器會先記住預覽。"
+    "empty": "把旅途照片上傳到這裡；登入的家庭成員會同步到雲端儲存。",
+    "uploading": "上傳中…",
+    "uploadFailed": "照片上傳失敗，請檢查連線後再試。"
   },
   "day": {
     "label": "Day {number}",

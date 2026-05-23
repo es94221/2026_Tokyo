@@ -52,6 +52,8 @@ jobs:
           NEXT_PUBLIC_MAP_QUERY: ${{ secrets.NEXT_PUBLIC_MAP_QUERY }}
           NEXT_PUBLIC_MAP_ZOOM: ${{ secrets.NEXT_PUBLIC_MAP_ZOOM }}
           NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }}
+          NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET: ${{ secrets.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET }}
+          NEXT_PUBLIC_SUPABASE_STORAGE_ENABLED: ${{ secrets.NEXT_PUBLIC_SUPABASE_STORAGE_ENABLED }}
 
       - name: Verify static export
         run: test -f out/index.html

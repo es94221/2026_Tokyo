@@ -59,4 +59,8 @@ export const tripConfig = {
     tableName: process.env.NEXT_PUBLIC_SUPABASE_TABLE ?? "trip_state",
     rowId: process.env.NEXT_PUBLIC_SUPABASE_ROW_ID ?? "family-trip",
   },
+  storage: {
+    enabled: process.env.NEXT_PUBLIC_SUPABASE_STORAGE_ENABLED !== "false",
+    bucket: process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET ?? "trip-photos",
+  },
 };

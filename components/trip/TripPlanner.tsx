@@ -71,7 +71,7 @@ export function TripPlanner({ tripId, tripName, tripStatus, onBackToHub }: TripP
         <MapSection />
         <PhotosSection
           photos={planner.photos}
-          onAdd={(urls) => void planner.addPhotos(urls)}
+          onAdd={(files) => planner.addPhotos(files)}
           onDelete={(index) => void planner.deletePhoto(index)}
         />
       </main>

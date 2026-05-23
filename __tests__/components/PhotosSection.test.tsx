@@ -4,37 +4,28 @@ import { describe, expect, it, vi } from "vitest";
 import { PhotosSection } from "@/components/trip/PhotosSection";
 import { renderWithLocale } from "@/test/render";
 
+vi.mock("@/lib/photo-storage", () => ({
+  resolvePhotoUrls: (refs: string[]) => Promise.resolve(refs),
+}));
+
 describe("PhotosSection", () => {
   it("shows empty state without photos", async () => {
     await renderWithLocale(<PhotosSection photos={[]} onAdd={vi.fn()} onDelete={vi.fn()} />);
     expect(document.querySelector(".photo-grid .empty-state")).toBeInTheDocument();
   });
 
-  it("uploads images as data URLs", async () => {
+  it("passes selected files to onAdd", async () => {
     const user = userEvent.setup();
-    const onAdd = vi.fn();
-    const readAsDataURL = vi.fn();
+    const onAdd = vi.fn().mockResolvedValue(undefined);
     const file = new File(["pixels"], "trip.png", { type: "image/png" });
-
-    class MockFileReader {
-      result = "data:image/png;base64,abc";
-      onload: (() => void) | null = null;
-      readAsDataURL() {
-        readAsDataURL();
-        this.onload?.();
-      }
-    }
-    vi.stubGlobal("FileReader", MockFileReader as unknown as typeof FileReader);
 
     await renderWithLocale(<PhotosSection photos={[]} onAdd={onAdd} onDelete={vi.fn()} />);
     const input = document.querySelector('input[type="file"]') as HTMLInputElement;
     await user.upload(input, file);
 
     await waitFor(() => {
-      expect(onAdd).toHaveBeenCalledWith(["data:image/png;base64,abc"]);
+      expect(onAdd).toHaveBeenCalledWith([file]);
     });
-    expect(readAsDataURL).toHaveBeenCalled();
-    vi.unstubAllGlobals();
   });
 
   it("renders photos and deletes on click", async () => {
@@ -49,7 +40,9 @@ describe("PhotosSection", () => {
       />,
     );
 
-    expect(screen.getByRole("img")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByRole("img")).toBeInTheDocument();
+    });
     await user.click(screen.getByRole("button", { name: /刪除|delete/i }));
     expect(onDelete).toHaveBeenCalledWith(0);
   });
